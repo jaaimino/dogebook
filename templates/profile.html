@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '/sections/meta.html' %}
+    <title></title>
+    {% include '/sections/includes.html' %}
+</head>
+<body>
+    {% include 'sections/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <div class="page-header">
+                    <h1><strong>{{ data["user"].name }}</strong><small> {{ data["user"].tagline }}</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <div class="col-md-4 col-md-offset-1">
+                <img class="img img-responsive img-thumbnail" src="{{ url_for('static', filename='img/avatars/doge.png') }}">
+            </div>
+            <div class="col-md-5">
+                <h2><strong>Such Info</strong></h2>
+                <h4><strong>State:</strong> {{ data["user"].state }}</h4>
+                <h4><strong>City:</strong> {{ data["user"].city }}</h4>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <div class="col-md-5 col-md-offset-1">
+                <h2><strong>Very Bio</strong></h2>
+                {{ data["user"].bio }}
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <div class="col-md-10 col-md-offset-1">
+                <h2><strong>Many Friends</strong></h2>
+            </div>
+        </div>
+        {% for friend in data["friends"] %}
+        <div class="row" style="">
+            <div class="col-md-10 col-md-offset-1">
+                <h3><a href="/profile/{{ friend.id }}">{{ friend.name }}</a></h3>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row" style="margin-top: px;">
+            <div class="col-md-10 col-md-offset-1">
+                <hr>
+                {% if data["userid"] != session["userid"] and not data["user"] in data["currentuser"].friends %}
+                <a class="btn btn-lg btn-primary" href="/add_friend/{{data["user"].id}}">Add Friend</a>
+                {% endif %}
+                {% if data["userid"] != session["userid"] and data["user"] in data["currentuser"].friends %}
+                <a class="btn btn-lg btn-primary" href="/remove_friend/{{data["user"].id}}">Remove Friend</a>
+                {% endif %}
+                <a class="btn btn-lg btn-primary" href="/profile/{{data["user"].id}}/edit">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

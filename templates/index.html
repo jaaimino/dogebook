@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include '/sections/meta.html' %}
+	<title></title>
+	{% include '/sections/includes.html' %}
+</head>
+<body>
+	{% include '/sections/navbar.html' %}
+	<div class="container">
+		<div class="row">
+			<img class="img img-responsive img-rounded center-block" src="{{ url_for('static', filename='img/dogebook_dash.jpg') }}"/>
+		</div>
+		<div class="row">
+			
+			<div class="col-md-10 col-md-offset-1 text-center">
+				<h2>Many friends! Such social media! Wow!</h2>
+				<a class="btn btn-lg btn-primary" href="/create_account">Create Account</a>
+				<a class="btn btn-lg btn-primary" href="/login">Login</a>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

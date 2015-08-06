@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '/sections/meta.html' %}
+    <title></title>
+    {% include '/sections/includes.html' %}
+</head>
+<body>
+    {% include 'sections/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form class="form" data-toggle="validator" role="form" method="POST" action="" enctype="multipart/form-data">
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="inputName" placeholder="Type a friend's name here" required>
+                      <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit">Search</button>
+                      </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <h2>Search Results</h2>
+                <hr>
+            </div>
+        </div>
+        <!-- Display all posts -->
+        {% if data["nresults"] == 0 %}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p>No results...</p>
+            </div>
+        </div>
+        {% endif %}
+        {% for result in data["results"] %}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <a href="/profile/{{result.id}}"><h3>{{ result.name }}</h3></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1"><hr></div>
+        </div>
+        {% endfor %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

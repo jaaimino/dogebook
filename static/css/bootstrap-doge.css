@@ -1,0 +1,18 @@
+.navbar{
+    background-color:#D8BD62;
+    border-bottom: 2px solid #CFA81F;
+}
+.navbar-toggle{
+    background-color:#C9821E;
+}
+.icon-bar{
+    color:purple;
+}
+.navbar a{
+    color:#71574C;
+    background-color:transparent;
+    font-weight:bold;
+}
+.navbar-nav a:active, .navbar-nav a:hover, .navbar-nav a:focus{
+    background-color:transparent;
+}

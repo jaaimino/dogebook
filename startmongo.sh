@@ -1,0 +1,1 @@
+mongod --smallfiles --syslog --fork

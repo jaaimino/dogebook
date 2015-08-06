@@ -1,0 +1,20 @@
+#doge-brand{
+    color:#2D231F;
+    opacity:0.8;
+    font-weight:bold;
+}
+#doge-brand:active, #doge-brand:hover{
+    color:#71574C;
+    opacity:1.0;
+}
+#doge-brand-image{
+    position:relative;
+    top:-20px;
+    width:40px;
+    height:49px;
+    
+}
+#doge-brand-text{
+    position:relative;
+    top:-10px;
+}

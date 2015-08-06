@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '/sections/meta.html' %}
+    <title></title>
+    {% include '/sections/includes.html' %}
+</head>
+<body>
+    {% include 'sections/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="text-center">{{ data["error"] }}</h2>
+                <a class="btn btn-lg btn-primary" href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

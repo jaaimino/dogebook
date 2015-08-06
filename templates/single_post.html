@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '/sections/meta.html' %}
+    <title></title>
+    {% include '/sections/includes.html' %}
+</head>
+<body>
+    {% include 'sections/navbar.html' %}
+    <div class="container">
+        <!-- Display all posts -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/profile/{{ data['post'].author.id }}"><strong>{{ data["post"].author.name }}</strong></a>
+                        <small><em>{{ data['post'].datetime.strftime('%b %d, %Y %I:%M%p') }}</em></small>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p>{{ data["post"].content }}</p>
+                            </div>
+                            {% if data["post"].author == data["user"] %}
+                            <div class="col-md-2">
+                                <a href="/post/{{data['post'].id}}/delete"><button class="btn btn-small btn-danger pull-right">Delete</button></a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        {% for comment in data["comments"] %}
+                        <div class="row">
+                            <div class="col-md-5">
+                                <a href="/profile/{{comment.author.id}}"><strong>{{ comment.author.name }}</strong></a>
+                                <small><em>{{ comment.datetime.strftime('%b %d, %Y %I:%M%p') }}</em></small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p>{{comment.content}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-md-5">
+                                <form class="form" data-toggle="validator" role="form" method="POST" action="/post/{{data['post'].id}}/add_comment" 
+                                enctype="multipart/form-data">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control" name="inputText" placeholder="Write a comment here.." required>
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Add</button>
+                                      </span>
+                                    </div><!-- /input-group -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

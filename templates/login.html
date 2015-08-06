@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include '/sections/meta.html' %}
+  <title></title>
+  {% include '/sections/includes.html' %}
+</head>
+<body>
+  {% include 'sections/navbar.html' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <h2>Login</h2>
+        <form data-toggle="validator" role="form" method="POST" action="/login" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="inputEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="control-label">Password</label>
+              <div class="form-group">
+                <input type="password" data-toggle="validator" data-minlength="6" name="inputPassword" class="form-control" id="inputPassword" placeholder="Password" required>
+                <span class="help-block">Required</span>
+              </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% if "message" in data %}
+    <div class="row">
+      <div class="col-md-6">
+          <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove"></span><strong> {{ data["message"] }} </strong>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/validator.min.js') }}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '/sections/meta.html' %}
+    <title></title>
+    {% include '/sections/includes.html' %}
+</head>
+<body>
+    {% include 'sections/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <form class="form" data-toggle="validator" role="form" method="POST" action="/newpost" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <textarea class="form-control custom-control" rows="3" style="resize:none;" name="inputText" placeholder="What am I thinking..." required></textarea> 
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <h2>Such Feed. Very News. Wow!</h2>
+                <hr>
+            </div>
+        </div>
+        <!-- Display all posts -->
+        {% for post in data["posts"] %}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/profile/{{ post.author.id }}"><strong>{{ post.author.name }}</strong></a>
+                        <small><em>{{ post.datetime.strftime('%b %d, %Y %I:%M%p') }}</em></small>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p>{{ post.content }}</p>
+                            </div>
+                            {% if post.author == data["user"] %}
+                            <div class="col-md-2">
+                                <a href="/post/{{post.id}}/delete"><button class="btn btn-small btn-danger pull-right">Delete</button></a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <a class="btn btn-primary" href="/post/{{post.id}}">{{data["comment_counts"][loop.index-1]}} Comments</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row text-center">
+            <nav>
+              <ul class="pagination">
+                <li>
+                  <a href="/posts/{{data["prev_page"]}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                {% for i in range(0,(data["page_count"]+1)) %}
+                <li><a href="/posts/{{i}}">{{i}}</a></li>
+                {% endfor %}
+                <li>
+                  <a href="/posts/{{data["next_page"]}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>

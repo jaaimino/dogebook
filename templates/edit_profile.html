@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include '/sections/meta.html' %}
+  <title></title>
+  {% include '/sections/includes.html' %}
+</head>
+<body>
+  {% include 'sections/navbar.html' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Editing Profile for {{ data["user"].name }}</h2>
+        <form data-toggle="validator" role="form" method="POST" action="" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="inputName" class="control-label">Name</label>
+            <input type="text" class="form-control" name="inputName" id="inputName" data-match-error="Please fill out this field" 
+            placeholder="Cina Jordon Saffary" value="{{ data["user"].name }}" required>
+            <span class="help-block with-errors">First, Middle(Optional) and Last</span>
+          </div>
+          <div class="form-group">
+            <label for="inputTagline" class="control-label">Tagline</label>
+            <input type="text" class="form-control" name="inputTagline" id="inputTagline" data-match-error="Please fill out this field" 
+            placeholder="Cool kid #1" value="{{ data["user"].tagline }}" required>
+            <span class="help-block with-errors"></span>
+          </div>
+          <div class="form-group">
+            <label for="inputState" class="control-label">State</label>
+            <input type="text" class="form-control" name="inputState" id="inputState" data-match-error="Please fill out this field" 
+            placeholder="New Jersey" value="{{ data["user"].state }}" required>
+            <span class="help-block with-errors"></span>
+          </div>
+          <div class="form-group">
+            <label for="inputCity" class="control-label">City</label>
+            <input type="text" class="form-control" name="inputCity" id="inputCity" data-match-error="Please fill out this field" 
+            placeholder="New Jersey" value="{{ data["user"].city }}" required>
+            <span class="help-block with-errors"></span>
+          </div>
+          <div class="form-group">
+            <label for="inputBio" class="control-label">Bio</label>
+            <textarea name="inputBio" class="form-control" rows="5">{% if data["user"].bio != None %}{{ data["user"].bio }}{% endif %}</textarea>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      {% if "message" in data %}
+      <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove"></span><strong> {{ data["message"] }} </strong>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/validator.min.js') }}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+</body>
+</html>
